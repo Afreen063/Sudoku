@@ -3,11 +3,17 @@
 @tailwind utilities;
 
 @layer components{
+  .table{
+    width:378px;
+    height: 378px;
+    border: 4px solid black;
+    margin-top: 50px;
+    margin-left: 300px;
+  }
   .liItem{
-    width: 50px;
-    height: 50px;
-    border: 2px solid black;
-    border-radius:  10px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid gray;
     text-align: center;
   }
 }

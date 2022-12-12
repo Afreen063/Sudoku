@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
 function App() {
-   const [array, setArray]=useState([0,0,0,0,0,0,0,0,0]); 
+   const [array, setArray]=useState([[1,2,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]); 
    const [show, setShow] = useState(false)
    const handleInput=(e)=>{
         
@@ -16,20 +16,22 @@ function App() {
   return (
     <div className="App">
      <h1 className="text-3xl">Sudoku Solver</h1>
-     <div className="">
+     <div className="table">
      <tbody>
          {
-          array.map((i)=>{
-              return (
-                <tr key={i}>
-         { array.map((i)=>{
-            return (
-              <td className="liItem"></td>
-            )
-          })}
-          </tr>
-              )
-          })
+         [0,3,6].map((i)=>{
+          return (
+            <tr>
+              {
+                [0,3,6].map((j)=>{
+                  return (
+                    <td className="liItem">{array[i][j]}</td>
+                  )
+                })
+              }      
+            </tr>
+          )
+         })
          }
          </tbody>
          </div>
