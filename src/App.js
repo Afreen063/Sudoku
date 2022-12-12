@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+
 
 function App() {
+   const [array, setArray]=useState([0,0,0,0,0,0,0,0,0]); 
+   const [show, setShow] = useState(false)
+   const handleInput=(e)=>{
+        
+   } 
+
+   const handleClick=()=>{
+       setShow(true)
+   }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1 className="text-3xl">Sudoku Solver</h1>
+     <div className="">
+     <tbody>
+         {
+          array.map((i)=>{
+              return (
+                <tr key={i}>
+         { array.map((i)=>{
+            return (
+              <td className="liItem"></td>
+            )
+          })}
+          </tr>
+              )
+          })
+         }
+         </tbody>
+         </div>
+         <button onClick={handleClick}>Solve</button>
     </div>
   );
 }
