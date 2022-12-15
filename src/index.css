@@ -16,4 +16,16 @@
     border: 2px solid gray;
     text-align: center;
   }
+  .griditem{
+    width: 40px;
+    height: 40px;
+    border: 2px solid gray;
+    border-right-width: 4px;
+    border-right-color: black;
+    text-align: center;
+  }
+  .bottomline{
+    border-bottom-color: black;
+    border-bottom-width: 4px;
+  }
 }
