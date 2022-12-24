@@ -15,10 +15,10 @@ function App() {
     [0,0,0,0,0,0,0,0,0]
    ]); 
    const [show, setShow] = useState(false)
-   const handleInput=(e)=>{
+   const solveSudoku=(e)=>{
     const board = [...array];
 
-
+   
 
    let RowPosibility = [] ;
    let presentRow=[];
@@ -32,7 +32,7 @@ function App() {
         RowPosibility[row]=row+1;
          }
    }
- // console.log(RowPosibility);
+ //console.log(presentRow);
 
 function Row()//this function will create an array of number which is present in the row
 {
@@ -107,33 +107,38 @@ function Row()//this function will create an array of number which is present in
  Colpossibility();
  Grid();
  Row();
+ //console.log(presentRow);
  function posssibiltyInRows()
  {
      let possibleNumber=[];
      let c=0,d=0,flag=0;
+     
      while(flag===0)
      {
          let unique=0;
+         
      for (let row=0;row<board.length;row+=3)
      {
          for(let col=0;col<board.length;col+=3)
          {
              let gp=gridPresent[c++];
-            //console.log(RowPosibility);
+            //console.log(gp);
              for(let m=0;m<3;m++)
              {
                 RowPosibility=RowPosibility.filter(function(element){return  gp.indexOf(element)<0 ; });
+               // console.log(RowPosibility)
                 RowPosibility=RowPosibility.filter(function(element){return  (presentRow[(row+m)]).indexOf(element)<0 ; });
                  for(let n=0;n<3;n++)
                  {
                      if(board[row+m][col+n]==0)
                      {
                    possibleNumber = RowPosibility.filter(function(element){return  (gridCol[col+n]).indexOf(element)<0; });
-                   // console.log(RowPosibility);
-                  // console.log(possibleNumber);
+                  // console.log(RowPosibility);
+              //   console.log(board);
                     if(possibleNumber.length==1)
                     {
                         board[row+m][col+n]=possibleNumber[0];
+                       
                         Grid();
                         Colpossibility();
                        Row();
@@ -153,17 +158,21 @@ function Row()//this function will create an array of number which is present in
      flag=1;
     }
  }
- posssibiltyInRows();
+posssibiltyInRows();
  console.log(board);
-    //  setArray(board);
+     setArray(board);
 
-      //  setShow(true);
+       setShow(true);
        // console.log(array)
    } 
 
    const handleChange=(row,col,event)=>{
       let copy=[...array];
-      copy[row][col]=event.target.value;
+      let e=parseInt(event.target.value);
+     //console.log(e)
+      copy[row][col]=e;
+     // copy[0][0]=e;
+      //console.log(copy);
       setArray(copy);
    }
 
@@ -179,30 +188,30 @@ function Row()//this function will create an array of number which is present in
             <tr key={rowIndex}>
               {
                 row.map((col, colIndex)=>{
-                //  console.log(colIndex);
+               //  console.log(row);
                  if(colIndex==2||colIndex==5)
                  {
                  if(rowIndex==2||rowIndex==5)
                  {
                   return (
-                    <td key={colIndex} ><input type="Number" className="griditem bottomline" maxLength={1} onChange={e=>handleChange(rowIndex,colIndex,e)}></input></td>
+                    <td key={colIndex} >{show?<p className="griditem bottomline">{array[rowIndex][colIndex]}</p>:<input type="Number" className="griditem bottomline" maxLength={1} onChange={e=>handleChange(rowIndex,colIndex,e)}></input>}</td>
                   )
                  }
                  else{
                   return (
-                    <td key={colIndex} ><input type="Number" className="griditem" maxLength={1} onChange={e=>handleChange(rowIndex,colIndex,e)}></input></td>
+                    <td key={colIndex} >{show?<p className="griditem">{array[rowIndex][colIndex]}</p>:<input type="Number" className="griditem" maxLength={1} onChange={e=>handleChange(rowIndex,colIndex,e)}></input>}</td>
                   )
                  }
                  }
                   if(rowIndex==2||rowIndex==5)
                  {
                   return (
-                    <td key={colIndex} ><input type="Number" className="liItem bottomline" maxLength={1} onChange={e=>handleChange(rowIndex,colIndex,e)}></input></td>
+                    <td key={colIndex} >{show?<p className="liItem bottomline">{array[rowIndex][colIndex]}</p>:<input type="Number" className="liItem bottomline" maxLength={1} onChange={e=>handleChange(rowIndex,colIndex,e)}></input>}</td>
                   )
                  }
                  else
                   return (
-                    <td key={colIndex}><input type="Number" className="liItem" maxLength={1} onChange={e=>handleChange(rowIndex,colIndex,e)}></input></td>
+                    <td key={colIndex}>{show?<p className="liItem">{array[rowIndex][colIndex]}</p>:<input type="Number" className="liItem" maxLength={1} onChange={e=>handleChange(rowIndex,colIndex,e)}></input>}</td>
                   )
                 })
               }      
@@ -214,7 +223,7 @@ function Row()//this function will create an array of number which is present in
      </table>
          </div>
          
-         <button onClick={handleInput}>Start</button>
+         <button onClick={solveSudoku}>Solve</button>
     </div>
   );
 }
